@@ -1,0 +1,18 @@
+<paquet
+	prefix="homedash"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.2.0-dev;3.2.*]"
+	logo="dashboard_logo-32.png"
+>
+	<nom>Dashboard Privé</nom>
+	<!-- Un accueil privé très arrangeant -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="ncore" compatibilite="[0.5.9;[" />
+	<necessite nom="saisies" compatibilite="[2.2.3;[" />
+</paquet>

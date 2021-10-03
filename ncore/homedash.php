@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * Homedash stocke les noisettes dans le dossier du privé nommé 'prive/squelettes/noisettes/'.
  *
- * @package SPIP\NCORE\TYPE_NOISETTE\SERVICE
+ * @package SPIP\HOMEDASH\TYPE_NOISETTE\SERVICE
  *
  * @uses ncore_chercher_service()
  *
@@ -65,10 +65,12 @@ function homedash_conteneur_verifier($plugin, $conteneur) {
 	include_spip('homedash_fonctions');
 	$conteneur_verifie = array();
 	if ($conteneur) {
-		if (isset($conteneur['squelette'], $conteneur['auteur'], $conteneur['id_auteur'])
-		and (in_array($conteneur['squelette'], homedash_bloc_lister_defaut()))
-		and $conteneur['auteur']
-		and intval($conteneur['id_auteur'])) {
+		if (
+			isset($conteneur['squelette'], $conteneur['auteur'], $conteneur['id_auteur'])
+			and (in_array($conteneur['squelette'], homedash_bloc_lister_defaut()))
+			and $conteneur['auteur']
+			and intval($conteneur['id_auteur'])
+		) {
 			// Le conteneur contient les index minimaux, on le réduit à ces seuls index.
 			$conteneur_verifie = array_intersect_key($conteneur, array_flip($index_conteneur));
 		}
@@ -81,7 +83,7 @@ function homedash_conteneur_verifier($plugin, $conteneur) {
  * Construit un identifiant unique pour le conteneur de noisettes hors les noisettes conteneur.
  * Pour Homedash, un conteneur est toujours un bloc Z de la page d'accueil du privé associé à un auteur donné.
  *
- * @package SPIP\NOIZETIER\CONTENEUR\SERVICE
+ * @package SPIP\HOMEDASH\CONTENEUR\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -113,7 +115,7 @@ function homedash_conteneur_identifier($plugin, $conteneur) {
  * N-Core ne fournit le conteneur pour les noisettes conteneur.
  * Pour les autres conteneurs, c'est à Homedash de s'en occuper.
  *
- * @package SPIP\NOIZETIER\CONTENEUR\SERVICE
+ * @package SPIP\HOMEDASH\CONTENEUR\SERVICE
  *
  * @param string $plugin
  *        Identifiant qui permet de distinguer le module appelant qui peut-être un plugin comme le noiZetier ou
@@ -133,7 +135,7 @@ function homedash_conteneur_construire($plugin, $id_conteneur) {
 	$conteneur = array();
 	if ($id_conteneur) {
 		$elements = explode('|', $id_conteneur);
-		if (count($elements) == 3) {
+		if (count($elements) === 3) {
 			// -- le type d'objet auteur et son id
 			$conteneur['auteur'] = $elements[1];
 			$conteneur['id_auteur'] = $elements[2];
